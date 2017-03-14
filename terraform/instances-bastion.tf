@@ -6,7 +6,7 @@ module "ssh_key" {
 resource "aws_instance" "bastion" {
   count = "${length(var.vpc_cidrs_public)}"
 
-  ami           = "${data.aws_ami.main.image_id}"
+  ami           = "${module.images.base_image}"
   instance_type = "${var.bastion_instance_type}"
   key_name      = "${var.ssh_key_name}"
   subnet_id     = "${element(aws_subnet.public.*.id,count.index)}"

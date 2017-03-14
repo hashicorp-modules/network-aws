@@ -5,10 +5,6 @@ variable "environment_name" {
   default = "vpc-foundation"
 }
 
-variable "os" {
-  default = "rhel"
-}
-
 variable "vpc_cidr" {
   default = "172.31.0.0/16"
 }
@@ -53,7 +49,7 @@ output "subnet_private_ids" {
 }
 
 output "bastion_username" {
-  value = "${lookup(var.os_user,var.os)}"
+  value = "${module.images.os_user}"
 }
 
 output "bastion_ips_public" {
