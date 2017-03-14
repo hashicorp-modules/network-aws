@@ -33,6 +33,10 @@ variable "bastion_instance_type" {
   default = "t2.small"
 }
 
+variable "ssh_key_name" {
+  type = "string"
+}
+
 //
 // Outputs
 //

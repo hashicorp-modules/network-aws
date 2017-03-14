@@ -8,7 +8,7 @@ resource "aws_instance" "bastion" {
 
   ami           = "${data.aws_ami.main.image_id}"
   instance_type = "${var.bastion_instance_type}"
-  key_name      = "${module.ssh_key.key_name}"
+  key_name      = "${var.ssh_key_name}"
   subnet_id     = "${element(aws_subnet.public.*.id,count.index)}"
 
   vpc_security_group_ids = [
