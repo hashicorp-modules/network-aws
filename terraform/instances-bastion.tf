@@ -1,8 +1,3 @@
-module "ssh_key" {
-  source = "git@github.com:hashicorp-modules/ssh-keypair.git//terraform"
-  environment_name = "${var.environment_name}"
-}
-
 resource "aws_instance" "bastion" {
   count = "${length(var.vpc_cidrs_public)}"
 
