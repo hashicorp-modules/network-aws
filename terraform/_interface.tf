@@ -45,7 +45,7 @@ output "subnet_private_ids" {
 }
 
 output "bastion_username" {
-  value = "${module.images.base_os_user}"
+  value = "${module.images.os_user}"
 }
 
 output "bastion_ips_public" {
