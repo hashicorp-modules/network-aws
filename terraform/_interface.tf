@@ -1,10 +1,17 @@
 //
-// Variables w/ Defaults
+// Variables
 //
 variable "environment_name" {
-  default = "vpc-foundation"
+  type = "string"
 }
 
+variable "ssh_key_name" {
+  type = "string"
+}
+
+//
+// Variables w/ Defaults
+//
 variable "vpc_cidr" {
   default = "172.31.0.0/16"
 }
@@ -27,10 +34,6 @@ variable "vpc_cidrs_private" {
 
 variable "bastion_instance_type" {
   default = "t2.small"
-}
-
-variable "ssh_key_name" {
-  type = "string"
 }
 
 //
