@@ -5,5 +5,5 @@ terraform {
 data "aws_availability_zones" "main" {}
 
 module "images" {
-  source = "git@github.com:hashicorp-modules/base-image-aws.git//terraform"
+  source = "git@github.com:hashicorp-modules/images-aws.git//terraform"
 }
