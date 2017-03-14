@@ -1,65 +1,57 @@
-variable "vpc_name" {
-	description = "The name of the VPC"
-	type        = "string"
+//
+// Variables w/ Defaults
+//
+variable "environment_name" {
+  default = "vpc-foundation"
 }
 
-variable "zone_name" {
-	description = "The name of the private zone for R53"
-	type        = "string"
+variable "os" {
+  default = "rhel"
 }
 
-variable "cidr_block" {
-	description = "The VPC-wide CIDR block"
-	type        = "string"
+variable "vpc_cidr" {
+  default = "172.31.0.0/16"
 }
 
-variable "public_subnets" {
-	description = "List of CIDR blocks for public subnets"
-	type        = "list"
+variable "vpc_cidrs_public" {
+  default = [
+    "172.31.0.0/20",
+    "172.31.16.0/20",
+    "172.31.32.0/20",
+  ]
 }
 
-variable "private_subnets" {
-	description = "List of CIDR blocks for private subnets"
-	type        = "list"
+variable "vpc_cidrs_private" {
+  default = [
+    "172.31.48.0/20",
+    "172.31.64.0/20",
+    "172.31.80.0/20",
+  ]
 }
 
-variable "availability_zones" {
-	description = "List of availability zones over which to distribute subnets"
-	type        = "list"
+variable "bastion_instance_type" {
+  default = "t2.small"
 }
 
-output "private_subnets" {
-	value = ["${aws_subnet.private.*.id}"]
-}
-
-output "public_subnets" {
-	value = ["${aws_subnet.public.*.id}"]
-}
-
-output "private_availability_zones" {
-	value = ["${aws_subnet.private.*.availability_zone}"]
-}
-
-output "public_availability_zones" {
-	value = ["${aws_subnet.public.*.availability_zone}"]
-}
-
-output "vpc_name" {
-	value = "${var.vpc_name}"
-}
-
+//
+// Outputs
+//
 output "vpc_id" {
-	value = "${aws_vpc.vpc.id}"
+  value = "${aws_vpc.main.id}"
 }
 
-output "s3_vpce_id" {
-	value = "${aws_vpc_endpoint.private_s3.id}"
+output "subnet_public_ids" {
+  value = ["${aws_subnet.public.*.id}"]
 }
 
-output "private_zone_id" {
-	value = "${aws_route53_zone.vpc_private.zone_id}"
+output "subnet_private_ids" {
+  value = ["${aws_subnet.private.*.id}"]
 }
 
-output "cidr_block" {
-	value = "${aws_vpc.vpc.cidr_block}"
+output "bastion_username" {
+  value = "${lookup(var.os_user,var.os)}"
+}
+
+output "bastion_ips_public" {
+  value = ["${aws_instance.bastion.*.public_ip}"]
 }
