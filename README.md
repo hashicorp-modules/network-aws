@@ -1,4 +1,4 @@
-# vpc
+# network-aws
 
 Creates a standard VPC with:
 - Three public subnets
