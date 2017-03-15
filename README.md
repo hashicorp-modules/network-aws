@@ -15,3 +15,15 @@ AWS_DEFAULT_REGION
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
 ```
+
+## Usage
+
+```
+module "vpc" {
+  source = "git@github.com:hashicorp-modules/network-aws.git//terraform"
+
+  environment_name = "${var.environment_name}"
+  os               = "${var.os}"
+  ssh_key_name     = "${module.ssh_key.ssh_key_name}"
+}
+```
