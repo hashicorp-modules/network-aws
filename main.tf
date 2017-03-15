@@ -8,5 +8,6 @@ module "vpc" {
   source = "./terraform"
 
   environment_name = "${var.environment_name}"
-  ssh_key_name     = "${module.ssh_key.key_name}"
+  os               = "ubuntu"
+  ssh_key_name     = "${module.ssh_key.ssh_key_name}"
 }

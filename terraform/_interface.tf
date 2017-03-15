@@ -5,6 +5,10 @@ variable "environment_name" {
   type = "string"
 }
 
+variable "os" {
+  type = "string"
+}
+
 variable "ssh_key_name" {
   type = "string"
 }
