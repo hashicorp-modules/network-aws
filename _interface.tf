@@ -2,6 +2,10 @@ variable "environment_name" {
   default = "vpc-foundation"
 }
 
+variable "os" {
+  default = "ubuntu"
+}
+
 //
 // Outputs
 //
