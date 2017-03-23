@@ -4,7 +4,13 @@ module "ssh_key" {
   environment_name = "${var.environment_name}"
 }
 
-module "vpc" {
+module "images" {
+  source = "git@github.com:hashicorp-modules/images-aws.git//terraform?ref=2017-03-23"
+
+  os = "${var.os}"
+}
+
+module "network" {
   source = "./terraform"
 
   environment_name = "${var.environment_name}"
