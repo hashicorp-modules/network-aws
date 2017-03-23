@@ -55,6 +55,14 @@ output "subnet_private_ids" {
   value = ["${aws_subnet.private.*.id}"]
 }
 
+output "security_group_egress_id" {
+  value = ["${aws_security_group.egress_public.id}"]
+}
+
+output "security_group_bastion_id" {
+  value = ["${aws_security_group.bastion_ssh.id}"]
+}
+
 output "bastion_username" {
   value = "${module.images.os_user}"
 }

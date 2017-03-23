@@ -5,7 +5,7 @@ terraform {
 data "aws_availability_zones" "main" {}
 
 module "images" {
-  source = "git@github.com:hashicorp-modules/images-aws.git//terraform"
+  source = "git@github.com:hashicorp-modules/images-aws.git//terraform?ref=2017-03-23"
 
-  os = "ubuntu"
+  os = "${var.os}"
 }
