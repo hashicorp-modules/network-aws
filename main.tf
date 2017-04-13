@@ -1,19 +1,11 @@
-module "ssh_key" {
-  source = "git@github.com:hashicorp-modules/ssh-keypair.git//terraform"
-
-  environment_name = "${var.environment_name}"
+terraform {
+  required_version = ">= 0.8.6"
 }
+
+data "aws_availability_zones" "main" {}
 
 module "images" {
-  source = "git@github.com:hashicorp-modules/images-aws.git//terraform?ref=2017-03-23"
+  source = "git@github.com:hashicorp-modules/images-aws.git?ref=2017-04-13"
 
   os = "${var.os}"
-}
-
-module "network" {
-  source = "./terraform"
-
-  environment_name = "${var.environment_name}"
-  os               = "${var.os}"
-  ssh_key_name     = "${module.ssh_key.ssh_key_name}"
 }
