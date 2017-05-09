@@ -1,38 +1,39 @@
-//
-// Variables
-//
+# Required variables
 variable "environment_name" {
-  type = "string"
+  description = "Environment Name"
 }
 
 variable "os" {
-  type = "string"
+  # case sensitive for AMI lookup
+  description = "Operating System to use ie RHEL or Ubuntu"
+}
+
+variable "os_version" {
+  description = "Operating System version to use ie 7.3 (for RHEL) or 16.04 (for Ubuntu)"
 }
 
 variable "ssh_key_name" {
-  type = "string"
+  description = "Pre-existing AWS key name you will use to access the instance(s)"
 }
 
-//
-// Variables w/ Defaults
-//
+# Optional variables
 variable "vpc_cidr" {
-  default = "172.31.0.0/16"
+  default = "172.19.0.0/16"
 }
 
 variable "vpc_cidrs_public" {
   default = [
-    "172.31.0.0/20",
-    "172.31.16.0/20",
-    "172.31.32.0/20",
+    "172.19.0.0/20",
+    "172.19.16.0/20",
+    "172.19.32.0/20",
   ]
 }
 
 variable "vpc_cidrs_private" {
   default = [
-    "172.31.48.0/20",
-    "172.31.64.0/20",
-    "172.31.80.0/20",
+    "172.19.48.0/20",
+    "172.19.64.0/20",
+    "172.19.80.0/20",
   ]
 }
 
@@ -40,9 +41,7 @@ variable "bastion_instance_type" {
   default = "t2.small"
 }
 
-//
-// Outputs
-//
+# Outputs
 output "vpc_id" {
   value = "${aws_vpc.main.id}"
 }
@@ -64,7 +63,7 @@ output "security_group_bastion_id" {
 }
 
 output "bastion_username" {
-  value = "${module.images.os_user}"
+  value = "${module.images-aws.os_user}"
 }
 
 output "bastion_ips_public" {
