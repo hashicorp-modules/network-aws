@@ -4,8 +4,23 @@ terraform {
 
 data "aws_availability_zones" "main" {}
 
-module "images-aws" {
-  source     = "git@github.com:hashicorp-modules/images-aws.git?ref=2017-05-26"
-  os         = "${var.os}"
-  os_version = "${var.os_version}"
+data "aws_ami" "base" {
+  most_recent      = true
+  owners           = ["${lookup(var.map_owner,lower(var.os))}"]
+  executable_users = ["all"]
+
+  filter {
+    name   = "name"
+    values = ["*${lookup(var.map_base_image_name,lower(var.os))}*"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 }
