@@ -41,6 +41,27 @@ variable "bastion_instance_type" {
   default = "t2.small"
 }
 
+variable "map_owner" {
+  default = {
+    rhel   = "309956199498" # Red Hat, Inc.
+    ubuntu = "099720109477" # Canonical
+  }
+}
+
+variable "map_base_image_name" {
+  default = {
+    rhel   = "RHEL-7.3_HVM_GA"
+    ubuntu = "ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server"
+  }
+}
+
+variable "user" {
+  default = {
+    rhel   = "ec2-user"
+    ubuntu = "ubuntu"
+  }
+}
+
 # Outputs
 output "vpc_cidr_block" {
   value = "${aws_vpc.main.cidr_block}"
@@ -67,7 +88,7 @@ output "security_group_bastion_id" {
 }
 
 output "bastion_username" {
-  value = "${module.images-aws.os_user}"
+  value = "${lookup(var.user,var.os)}"
 }
 
 output "bastion_ips_public" {
