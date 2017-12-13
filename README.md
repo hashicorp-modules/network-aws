@@ -22,7 +22,7 @@ You can pass the following Terraform variables during `terraform apply` or
 in a `terraform.tfvars` file. Examples below:
 
 - `environment_name` = "network-test"
-- `os` = "RHEL"
+- `os` = "rhel"
 - `os_version` = "7.3"
 - `ssh_key_name` = "test_aws"
 
