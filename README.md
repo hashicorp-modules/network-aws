@@ -28,7 +28,7 @@ This module requires a pre-existing AWS SSH key pair for each bastion host.
 - `vpc_cidrs_private`: [Optional] VPC CIDR blocks for private subnets, defaults to "10.139.11.0/24", "10.139.12.0/24", and "10.139.13.0/24".
 - `release_version`: [Optional] Release version tag to use (e.g. 0.1.0, 0.1.0-rc1, 0.1.0-beta1, 0.1.0-dev1), defaults to "0.1.0", view releases at https://github.com/hashicorp/guides-configuration#hashistack-version-tables.
 - `consul_version`: [Optional] Consul version tag to use (e.g. 1.2.0 or 1.2.0-ent), defaults to "1.2.0".
-- `vault_version`: [Optional] Vault version tag to use (e.g. 0.10.0 or 0.10.0-ent), defaults to "0.10.0".
+- `vault_version`: [Optional] Vault version tag to use (e.g. 0.10.3 or 0.10.3-ent), defaults to "0.10.3".
 - `nomad_version`: [Optional] Nomad version tag to use (e.g. 0.8.0 or 0.8.0-ent), defaults to "0.8.0".
 - `os`: [Optional] Operating System to use (e.g. RHEL or Ubuntu), defaults to "RHEL".
 - `os_version`: [Optional] Operating System version to use (e.g. 7.3 for RHEL or 16.04 for Ubuntu), defaults to "7.3".
