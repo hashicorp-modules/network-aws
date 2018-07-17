@@ -2,26 +2,6 @@ terraform {
   required_version = ">= 0.11.5"
 }
 
-provider "aws" {
-  version = "~> 1.12"
-}
-
-provider "template" {
-  version = "~> 1.0"
-}
-
-provider "random" {
-  version = "~> 1.1"
-}
-
-provider "tls" {
-  version = "~> 1.1"
-}
-
-provider "null" {
-  version = "~> 1.0"
-}
-
 data "aws_availability_zones" "main" {}
 
 resource "aws_vpc" "main" {
