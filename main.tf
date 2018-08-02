@@ -206,7 +206,7 @@ module "bastion_consul_client_sg" {
 
 resource "aws_security_group" "bastion" {
   count       = "${var.create && var.bastion_count > 0 ? 1 : 0}"
-  name_prefix = "${var.name}-bastion"
+  name_prefix = "${var.name}-bastion-"
   description = "Security Group for ${var.name} Bastion hosts"
   vpc_id      = "${var.create_vpc ? element(concat(aws_vpc.main.*.id, list("")), 0) : var.vpc_id}" # TODO: Workaround for issue #11210
 
@@ -247,7 +247,7 @@ resource "aws_instance" "bastion" {
 
   vpc_security_group_ids = [
     "${module.bastion_consul_client_sg.consul_client_sg_id}",
-    "${aws_security_group.bastion.id}",
+    "${element(concat(aws_security_group.bastion.*.id, list("")), 0)}", # TODO: Workaround for issue #11210
   ]
 
   tags = "${merge(var.tags, map("Name", format("%s-bastion-%d", var.name, count.index + 1), "Consul-Auto-Join", var.name))}"
