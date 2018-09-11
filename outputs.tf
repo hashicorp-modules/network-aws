@@ -49,7 +49,7 @@ output "subnet_private_ids" {
   value = ["${aws_subnet.private.*.id}"]
 }
 
-output "bastion_security_group" {
+output "bastion_sg_id" {
   value = "${element(concat(aws_security_group.bastion.*.id, list("")), 0)}"
 }
 

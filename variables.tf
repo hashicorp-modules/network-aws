@@ -40,6 +40,12 @@ variable "vpc_cidrs_private" {
   default     = ["10.139.11.0/24", "10.139.12.0/24", "10.139.13.0/24",]
 }
 
+variable "cidr_blocks" {
+  description = "Optional list of CIDR blocks to set on port 22 for SSH access, defaults to \"0.0.0.0/0\"."
+  type        = "list"
+  default     = []
+}
+
 variable "release_version" {
   description = "Release version tag (e.g. 0.1.0, 0.1.0-rc1, 0.1.0-beta1, 0.1.0-dev1), defaults to \"0.1.0\", view releases at https://github.com/hashicorp/guides-configuration#hashistack-version-tables"
   default     = "0.1.0"

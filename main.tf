@@ -221,7 +221,20 @@ resource "aws_security_group_rule" "ssh" {
   protocol          = "tcp"
   from_port         = 22
   to_port           = 22
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = ["${split(",", length(compact(var.cidr_blocks)) > 0 ? join(",", compact(var.cidr_blocks)) : "0.0.0.0/0")}"]
+  description       = "SSH access to Bastion host"
+}
+
+resource "aws_security_group_rule" "wetty_tcp" {
+  count = "${var.create && var.bastion_count > 0 ? 1 : 0}"
+
+  security_group_id = "${aws_security_group.bastion.id}"
+  type              = "ingress"
+  protocol          = "tcp"
+  from_port         = 3030
+  to_port           = 3030
+  cidr_blocks       = ["${split(",", length(compact(var.cidr_blocks)) > 0 ? join(",", compact(var.cidr_blocks)) : var.vpc_cidr)}"]
+  description       = "Wetty inbound TCP traffic to Bastion host"
 }
 
 resource "aws_security_group_rule" "egress_public" {
@@ -233,6 +246,7 @@ resource "aws_security_group_rule" "egress_public" {
   from_port         = 0
   to_port           = 0
   cidr_blocks       = ["0.0.0.0/0"]
+  description       = "All Bastion outbound traffic"
 }
 
 resource "aws_instance" "bastion" {

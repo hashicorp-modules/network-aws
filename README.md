@@ -8,8 +8,6 @@ Creates a standard network in AWS that includes:
 - One NAT Gateway in each public subnet
 - One bastion host in each public subnet with Consul, Vault, and Nomad agents installed
 
-This module requires a pre-existing AWS SSH key pair for each bastion host.
-
 ## Environment Variables
 
 - `AWS_DEFAULT_REGION`
@@ -26,6 +24,7 @@ This module requires a pre-existing AWS SSH key pair for each bastion host.
 - `vpc_cidrs_public`: [Optional] VPC CIDR blocks for public subnets, defaults to "10.139.1.0/24", "10.139.2.0/24", and "10.139.3.0/24".
 - `nat_count`: [Optional] Number of NAT gateways to provision across public subnets, defaults to public subnet count.
 - `vpc_cidrs_private`: [Optional] VPC CIDR blocks for private subnets, defaults to "10.139.11.0/24", "10.139.12.0/24", and "10.139.13.0/24".
+- `cidr_blocks`: [Optional] List of CIDR blocks to set on port 22 for SSH access, defaults to "0.0.0.0/0".
 - `release_version`: [Optional] Release version tag to use (e.g. 0.1.0, 0.1.0-rc1, 0.1.0-beta1, 0.1.0-dev1), defaults to "0.1.0", view releases at https://github.com/hashicorp/guides-configuration#hashistack-version-tables.
 - `consul_version`: [Optional] Consul version tag to use (e.g. 1.2.0 or 1.2.0-ent), defaults to "1.2.0".
 - `vault_version`: [Optional] Vault version tag to use (e.g. 0.10.3 or 0.10.3-ent), defaults to "0.10.3".
@@ -40,7 +39,7 @@ This module requires a pre-existing AWS SSH key pair for each bastion host.
 - `ssh_key_name`: [Optional] AWS key name you will use to access the Bastion host instance(s), defaults to generating an SSH key for you.
 - `private_key_file`: [Optional] Private key filename for AWS key passed in, defaults to empty.
 - `ssh_key_override`: [Optional] Override the default SSH key and pass in your own, defaults to false.
-- `user`: [Optional] Map of SSH users.
+- `users`: [Optional] Map of SSH users.
 - `tags`: [Optional] Optional map of tags to set on resources, defaults to empty map.
 
 ## Outputs
@@ -50,7 +49,7 @@ This module requires a pre-existing AWS SSH key pair for each bastion host.
 - `vpc_id`: The VPC ID.
 - `subnet_public_ids`: The public subnet IDs.
 - `subnet_private_ids`: The private subnet IDs.
-- `security_group_bastion`: The ID of the bastion host security group.
+- `bastion_sg_id`: The ID of the bastion host security group.
 - `bastion_ips_public`: The public IP(s) of the Bastion host(s).
 - `bastion_username`: The Bastion host username.
 - `private_key_name`: The private key name.
