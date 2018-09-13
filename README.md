@@ -50,7 +50,7 @@ This module requires a pre-existing AWS SSH key pair for each bastion host.
 - `vpc_id`: The VPC ID.
 - `subnet_public_ids`: The public subnet IDs.
 - `subnet_private_ids`: The private subnet IDs.
-- `security_group_bastion`: The ID of the bastion host security group.
+- `bastion_security_group`: The ID of the bastion host security group.
 - `bastion_ips_public`: The public IP(s) of the Bastion host(s).
 - `bastion_username`: The Bastion host username.
 - `private_key_name`: The private key name.
